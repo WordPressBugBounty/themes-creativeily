@@ -430,363 +430,6 @@ endif;
 
 
 
-// Theme page start
-
-add_action('admin_menu', 'creativeily_themepage');
-function creativeily_themepage()
-{
-	$option = get_option('creativeily_themepage_seen');
-	$awaiting = !$option ? ' <span class="awaiting-mod">1</span>' : '';
-	$theme_info = add_theme_page(__('Theme Settings', 'creativeily'), __('Theme Settings', 'creativeily').$awaiting, 'manage_options', 'creativeily-info.php', 'creativeily_info_page', 1);
-}
-function creativeily_info_page()
-{
-	$user = wp_get_current_user();
-	$theme = wp_get_theme();
-	$parent_name = is_child_theme() ? wp_get_theme($theme->Template) : '';
-	$theme_name = is_child_theme() ? $theme." ".__("and", "creativeily")." ".$parent_name : $theme;
-	$demo_text = is_child_theme() ? sprintf(__("Need inspiration? Take a moment to view our theme demo for the %s parent theme %s!", "creativeily"), $theme, $parent_name) : __("Need inspiration? Take a moment to view our theme demo!", "creativeily");
-	$premium_text = is_child_theme() ? sprintf(__("Unlock all features by upgrading to the premium edition of %s and its parent theme %s.", "creativeily"), $theme, $parent_name) : sprintf(__("Unlock all features by upgrading to the premium edition of %s.", "creativeily"),$theme);
-	$option_name = 'creativeily_themepage_seen';
-	$option = get_option($option_name, null);
-	if (is_null($option)) {
-		add_option($option_name, true);
-	} elseif (!$option) {
-		update_option($option_name, true);
-	} ?>
-	<div class="wrap">
-
-		<div class="spt-theme-settings-wrapper">
-			<div class="spt-theme-settings-wrapper-main-content">
-				<div class="spt-theme-settings-tabs">
-
-					<div class="spt-theme-settings-tab">
-						<input type="radio" id="tab-1" name="tab-group-1">
-
-
-
-						<label class="spt-theme-settings-label" for="tab-1"><?php esc_html_e("Get started with", "creativeily"); ?> <?php echo esc_html($theme_name); ?></label>
-
-						<div class="spt-theme-settings-content">
-
-							<div class="spt-theme-settings-content-getting-started-wrapper">
-								<div class="spt-theme-settings-content-item">
-									<div class="spt-theme-settings-content-item-header">
-										<?php esc_html_e("Add Menus", "creativeily"); ?>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<a href="<?php echo esc_url(admin_url('nav-menus.php'))  ?>"><?php esc_html_e("Go to Menus", "creativeily"); ?></a>
-									</div>
-								</div>
-
-								<div class="spt-theme-settings-content-item">
-									<div class="spt-theme-settings-content-item-header">
-										<?php esc_html_e("Add Widgets", "creativeily"); ?>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<a href="<?php echo esc_url(admin_url('widgets.php'))  ?>"><?php esc_html_e("Go to Widgets", "creativeily"); ?></a>
-									</div>
-								</div>
-
-								<div class="spt-theme-settings-content-item">
-									<div class="spt-theme-settings-content-item-header">
-										<?php esc_html_e("Change Header Image", "creativeily"); ?>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<a href="<?php echo esc_url(admin_url('customize.php')) ?>"><?php esc_html_e("Go to Customizer", "creativeily"); ?></a>
-									</div>
-								</div>
-
-								<div class="spt-theme-settings-content-item">
-									<div class="spt-theme-settings-content-item-header">
-										<?php esc_html_e("Change Site Title", "creativeily"); ?>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<a href="<?php echo esc_url(admin_url('customize.php')) ?>"><?php esc_html_e("Go to Customizer", "creativeily"); ?></a>
-									</div>
-								</div>
-
-								<div class="spt-theme-settings-content-item">
-									<div class="spt-theme-settings-content-item-header">
-										<?php esc_html_e("Upload Logo", "creativeily"); ?>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<a href="<?php echo esc_url(admin_url('customize.php')) ?>"><?php esc_html_e("Go to Customizer", "creativeily"); ?></a>
-									</div>
-								</div>
-
-								<div class="spt-theme-settings-content-item">
-									<div class="spt-theme-settings-content-item-header">
-										<?php esc_html_e("Change Background, Header and Footer Colors", "creativeily"); ?>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<a href="<?php echo esc_url(admin_url('customize.php')) ?>"><?php esc_html_e("Go to Customizer", "creativeily"); ?></a>
-									</div>
-								</div>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Customize All Fonts", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Customize All Colors", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Import Demo Content", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Demo Import", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Unlock Full SEO Optimization", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Hide Header Text", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Hide Logo", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Hide Navigation	", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Custom 404 Page Header Image", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Unlock Elementor Compatibility", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Install Elementor", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Access All Child Themes", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("View Child Themes", "creativeily"); ?></span>
-									</div>
-								</a>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Add Recent Posts Widget", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Widgets", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Categories Page Header Image", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-			<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Replace Copyright Text", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Default Posts Header Image", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Remove 'Tag' from tag page title", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Remove 'Author' from author page title", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Remove 'Category' from author page title", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Custom Page Header Image", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-								<a target="_blank" href="https://superbthemes.com/creativeily/" class="spt-theme-settings-content-item spt-theme-settings-content-item-unavailable">
-									<div class="spt-theme-settings-content-item-header">
-										<span><?php esc_html_e("Custom Search Results Header Image", "creativeily"); ?></span> <span><?php esc_html_e("Premium", "creativeily"); ?></span>
-									</div>
-									<div class="spt-theme-settings-content-item-content">
-										<span><?php esc_html_e("Go to Customizer", "creativeily"); ?></span>
-									</div>
-								</a>
-
-							</div>
-						</div> 
-					</div>
-
-
-				</div>      
-			</div>
-
-			<div class="spt-theme-settings-wrapper-sidebar">
-
-				<div class="spt-theme-settings-wrapper-sidebar-item">
-					<div class="spt-theme-settings-wrapper-sidebar-item-header"><?php esc_html_e("Additional Resources", "creativeily"); ?></div>
-					<div class="spt-theme-settings-wrapper-sidebar-item-content">
-						<ul>
-							<li>
-								<a target="_blank" href="https://wordpress.org/support/forums/"><span class="dashicons dashicons-wordpress"></span><?php esc_html_e("WordPress.org Support Forum", "creativeily"); ?></a>
-							</li>
-							<li>
-								<a target="_blank" href="https://www.facebook.com/superbthemescom/"><span class="dashicons dashicons-facebook-alt"></span><?php esc_html_e("Find us on Facebook", "creativeily"); ?></a>
-							</li>
-							<li>
-								<a target="_blank" href="https://twitter.com/superbthemescom"><span class="dashicons dashicons-twitter"></span><?php esc_html_e("Find us on Twitter", "creativeily"); ?></a>
-							</li>
-							<li>
-								<a target="_blank" href="https://www.instagram.com/superbthemes/"><span class="dashicons dashicons-instagram"></span><?php esc_html_e("Find us on Instagram", "creativeily"); ?></a>
-							</li>
-
-						</ul>
-					</div>
-				</div>
-
-
-				<div class="spt-theme-settings-wrapper-sidebar-item">
-					<div class="spt-theme-settings-wrapper-sidebar-item-header"><?php esc_html_e("View Demo", "creativeily"); ?></div>
-					<div class="spt-theme-settings-wrapper-sidebar-item-content">
-						<p><?php echo esc_html($demo_text); ?></p>
-						<a href="https://superbthemes.com/demo/creativeily/" target="_blank" class="button button-primary"><?php esc_html_e("View Demo", "creativeily"); ?></a>
-					</div>
-				</div>
-
-				<div class="spt-theme-settings-wrapper-sidebar-item">
-					<div class="spt-theme-settings-wrapper-sidebar-item-header"><?php esc_html_e("Upgrade to Premium", "creativeily"); ?></div>
-					<div class="spt-theme-settings-wrapper-sidebar-item-content">
-						<p><?php echo esc_html($premium_text); ?></p>
-						<a href="https://superbthemes.com/creativeily/" target="_blank" class="button button-primary"><?php esc_html_e("View Premium Version", "creativeily"); ?></a>
-					</div>
-				</div>
-
-				<div class="spt-theme-settings-wrapper-sidebar-item">
-					<div class="spt-theme-settings-wrapper-sidebar-item-header"><?php esc_html_e("Helpdesk", "creativeily"); ?></div>
-					<div class="spt-theme-settings-wrapper-sidebar-item-content">
-						<p><?php esc_html_e("If you have issues with", "creativeily"); ?> <?php echo esc_html($theme); ?> <?php esc_html_e("then send us an email through our website!", "creativeily"); ?></p>
-						<a href="https://superbthemes.com/customer-support/" target="_blank" class="button"><?php esc_html_e("Contact Support", "creativeily"); ?></a>
-					</div>
-				</div>
-
-				<div class="spt-theme-settings-wrapper-sidebar-item">
-					<div class="spt-theme-settings-wrapper-sidebar-item-header"><?php esc_html_e("Review the Theme", "creativeily"); ?></div>
-					<div class="spt-theme-settings-wrapper-sidebar-item-content">
-						<p><?php esc_html_e("Do you enjoy using", "creativeily"); ?> <?php echo esc_html($theme); ?><?php esc_html_e("? Support us by reviewing us on WordPress.org!", "creativeily"); ?></p>
-						<a href="https://wordpress.org/support/theme/<?php echo esc_attr(get_stylesheet()); ?>/reviews/#new-post" target="_blank" class="button"><?php esc_html_e("Leave a Review", "creativeily"); ?></a>
-					</div>
-				</div>
-
-
-
-			</div>
-
-		</div>
-	</div>
-
-
-	<?php
-}
-
-function creativeily_comparepage_css($hook) {
-	if ('appearance_page_creativeily-info' != $hook) {
-		return;
-	}
-	wp_enqueue_style('creativeily-custom-style', get_template_directory_uri() . '/css/compare.css');
-}
-add_action('admin_enqueue_scripts', 'creativeily_comparepage_css');
-
-// Theme page end
-
-
 
 
 
@@ -822,7 +465,7 @@ add_action('admin_enqueue_scripts', 'creativeily_comparepage_css');
  * Plugin:
  * require_once dirname( __FILE__ ) . '/tgmpa/class-tgm-plugin-activation.php';
  */
-require_once get_template_directory() . '/tgmpa/class-tgm-plugin-activation.php';
+require_once get_template_directory() . '/inc/tgm/class-tgm-plugin-activation.php';
 
 add_action( 'tgmpa_register', 'creativeily_register_required_plugins' );
 
@@ -851,14 +494,8 @@ function creativeily_register_required_plugins() {
 	$plugins = array(
 
 
-		// This is an example of how to include a plugin from the WordPress Plugin Repository.
 		array(
-			'name'      => 'Superb Helper',
-			'slug'      => 'superb-helper',
-			'required'  => false,
-		),
-				array(
-			'name'      => 'Superb Addons - WordPress Editor And Elementor Blocks, Sections & Patterns',
+			'name'      => 'Superb Addons',
 			'slug'      => 'superb-blocks',
 			'required'  => false,
 		),
@@ -880,7 +517,7 @@ function creativeily_register_required_plugins() {
 		'has_notices'  => true,                    // Show admin notices or not.
 		'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
 		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
-		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
+		'is_automatic' => true,                   // Automatically activate plugins after installation or not.
 		'message'      => '',                      // Message to output right before the plugins table.
 
 	);
@@ -890,56 +527,31 @@ function creativeily_register_required_plugins() {
 
 
 
-add_action('admin_init', 'creativeily_spbThemesNotification', 8);
 
-function creativeily_spbThemesNotification(){
-	$notifications = include('inc/admin_notification/Autoload.php');
-	$notifications->Add("creativeily_notification", "Unlock All Features with Creativeily Premium – Limited Time Offer", "
-		
-		Take advantage of the up to <span style='font-weight:bold;'>40% discount</span> and unlock all features with Creativeily Premium. 
-		The discount is only available for a limited time.
+// Initialize information content
+require_once trailingslashit(get_template_directory()) . 'inc/vendor/autoload.php';
 
-		<div>
-		<a style='margin-bottom:15px;' class='button button-large button-secondary' target='_blank' href='https://superbthemes.com/creativeily/'>Read More</a> <a style='margin-bottom:15px;' class='button button-large button-primary' target='_blank' href='https://superbthemes.com/creativeily/'>Upgrade Now</a>
-		</div>
+use SuperbThemesThemeInformationContent\ThemeEntryPoint;
 
-		", "info");
-
-	$options_notification_start = array("delay"=> "-1 seconds", "wpautop" => false);
-	$notifications->Add("creativeily_notification_start", "Let's get you started with Creativeily!", '
-		<span class="st-notification-wrapper">
-		<span class="st-notification-column-wrapper">
-		<span class="st-notification-column">
-		<img src="'. esc_url( get_template_directory_uri() . '/inc/admin_notification/src/preview.png' ).'" width="150" height="177" />
-		</span>
-
-		<span class="st-notification-column">
-		<h2>Why Creativeily</h2>
-		<ul class="st-notification-column-list">
-		<li>Easy to Use & Customize</li>
-		<li>Search Engine Optimized</li>
-		<li>Lightweight and Fast</li>
-		<li>Top-notch Customer Support</li>
-		</ul>
-		<a href="https://superbthemes.com/demo/creativeily/" target="_blank" class="button">View Creativeily Demo <span aria-hidden="true" class="dashicons dashicons-external"></span></a> 
-
-		</span>
-		<span class="st-notification-column">
-		<h2>Customize Creativeily</h2>
-		<ul>
-		<li><a href="'. esc_url( admin_url( 'customize.php' ) ) .'" class="button button-primary">Customize The Design</a></li>
-		<li><a href="'. esc_url( admin_url( 'widgets.php' ) ) .'" class="button button-primary">Add/Edit Widgets</a></li>
-		<li><a href="https://superbthemes.com/customer-support/" target="_blank" class="button">Contact Support <span aria-hidden="true" class="dashicons dashicons-external"></span></a> </li>
-		</ul>
-		</span>
-		</span>
-		<span class="st-notification-footer">
-		Creativeily is created by SuperbThemes. We have 100.000+ users and are rated <strong>Excellent</strong> on Trustpilot <img src="'. esc_url( get_template_directory_uri() . '/inc/admin_notification/src/stars.svg' ).'" width="87" height="16" />
-		</span>
-		</span>
-
-		<style>.st-notification-column-wrapper{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;border-top:1px solid #eee;padding-top:20px;margin-top:3px}.st-notification-column-wrapper h2{margin:0}.st-notification-footer img{margin-bottom:-3px;margin-left:10px}.st-notification-column-wrapper .button{min-width:180px;text-align:center;margin-top:10px}.st-notification-column{margin-right:10px;padding:0 10px;max-width:250px;width:100%}.st-notification-column img{border:1px solid #eee}.st-notification-footer{display:inline-block;width:100%;padding:15px 0;border-top:1px solid #eee;margin-top:10px}.st-notification-column:first-of-type{padding-left:0;max-width:160px}.st-notification-column-list li{list-style-type:circle;margin-left:15px;font-size:14px}@media only screen and (max-width:1000px){.st-notification-column{max-width:33%}}@media only screen and (max-width:800px){.st-notification-column{max-width:50%}.st-notification-column:first-of-type{display:none}}@media only screen and (max-width:600px){.st-notification-column-wrapper{display:block}.st-notification-column{width:100%;max-width:100%;display:inline-block;padding:0;margin:0}span.st-notification-column:last-of-type{margin-top:30px}}</style>
-
-		', "info", $options_notification_start);
-	$notifications->Boot();
-}
+ThemeEntryPoint::init([
+    'type' => 'classic', // block / classic
+    'theme_url' => 'https://superbthemes.com/creativeily/',
+    'demo_url' => 'https://superbthemes.com/demo/creativeily/',
+    'features' => array(
+    	array('title'=>'Customize All Fonts'),
+    	array('title'=>'Customize All Colors'),
+    	array('title'=>'Hide Header Text'),
+    	array('title'=>'Hide Logo'),
+    	array('title'=>'Hide Navigation'),
+    	array('title'=>'Custom 404 Page Header Image'),
+    	array('title'=>'Add Recent Posts Widget'),
+    	array('title'=>'Categories Page Header Image'),
+    	array('title'=>'Replace Copyright Text'),
+    	array('title'=>'Default Posts Header Image'),
+    	array('title'=>'Remove "Tag" from tag page title'),
+    	array('title'=>'Remove "Author" from author page title'),
+    	array('title'=>'Remove "Category" from author page title'),
+    	array('title'=>'Custom Page Header Image'),
+    	array('title'=>'Custom Search Results Header Image')
+    )
+]);
